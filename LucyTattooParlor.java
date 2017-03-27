@@ -82,25 +82,42 @@ public class LucyTattooParlor {
 	*/
 	public static boolean addCustomer(TattooCustomer [][] a, TattooCustomer c) {
 	
-		int currentShortest = 0;
-		int filledSlots = 0;
+//		int currentShortest = 0;
+//		int filledSlots = 0;
+//		
+//		for (int i = 0; i< a[0].length; i++){
+//			if(a[0][i] != null){
+//				currentShortest++;
+//			}
+//		}
+//					
+//		for (int x = 0; x >= a.length; x++){
+//			for (int j = 0; j < (a.length); j++){
+//				for (int i = 0; i< a[j].length; i++){
+//					if(a[j][i] != null){
+//						filledSlots++;
+//					}
+//					if(filledSlots < current)
+//				}
+//			}
+//		}	
 		
-		for (int i = 0; i< a[0].length; i++){
-			if(a[0][i] != null){
-				currentShortest++;
+		//this is for the array index of the shortest time artist
+		int shortest = 0;
+		
+		for (int i = 1; i < a.length; i++){
+			if (computeMinutesOfWork(a[i]) < computeMinutesOfWork(a[shortest])){
+				shortest = i;
 			}
 		}
-					
-		for (int x = 0; x >= a.length; x++){
-			for (int j = 0; j < (a.length); j++){
-				for (int i = 0; i< a[j].length; i++){
-					if(a[j][i] != null){
-						filledSlots++;
-					}
-					if(filledSlots < current)
-				}
+		
+		for (int j = 0; j < a[shortest].length; j++){
+			if (a[shortest][j] == null){
+				a[shortest][j] = c;
+				return true;
 			}
-		}	
+		}
+		
 	return false;
 	}
 
