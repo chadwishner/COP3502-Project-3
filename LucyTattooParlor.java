@@ -2,21 +2,20 @@ import java.util.*;
 
 public class LucyTattooParlor {
 
-	public static int maxCustomers;
-	
 	public static void main(String [] args){
 		
 		Scanner input = new Scanner(System.in);
 		
 		maxCustomers = Integer.parseInt(args[2]);
+		TattooCustomer [][] array = makeArray(args);
 		
 
 		System.out.println("Please enter your name.");
 		String name = input.next();
 			if (name.compareToIgnoreCase("Print Waitlist") == 0){
-				//print the waitlist array
+				printArray(array);
 			}
-					
+			else {		
 		System.out.println("Hi " + name + ", what tatoo would you like?");
 		String tattoo = input.next();
 		
@@ -31,15 +30,51 @@ public class LucyTattooParlor {
 				
 			}
 		System.out.println("How many minutes is your tattoo expected to take?");
-		int time = input.nextInt();
-		 
+		int time = input.nextInt();		 
 			
-//		}
-		//add if the artist's indexes are full or if time > 8 hours, then the customer cannot be added to that artist and must print out an error message.
+		}
+		
+			//add if the artist's indexes are full or if time > 8 hours, then the customer cannot be added to that artist and must print out an error message.
 		//add if for if all artists are full in either indexes or in time (8 hour max)
 
 		//must add name, tattoo, and time to specified artist or artist of shortest time
 	}
+	
+	public static TattooCustomer [][] makeArray(String [] args){
+		int numArtist = Integer.parseInt(args[0]);
+		int maxCustomers = Integer.parseInt(args[1]);
+		
+		TattooCustomer [][] array = new TattooCustomer [numArtist][maxCustomers];
+
+		return array;
+	}
+	
+	public static void printArray(TattooCustomer [][] array){
+		for (int i = 0; i < array.length; i++){
+			System.out.print("\t\t|\t");
+			for (int j = 0; j < array [i].length; j++){
+				if (array[i][j] != null){
+				System.out.print(array[i][j].getName() + "\t");
+				}	
+			}
+	
+			System.out.print("/nArtist " + i + "\t\t|\t");
+			for (int j = 0; j < array [i].length; j++){
+				if (array[i][j] != null){
+				System.out.print(array[i][j].getTattoo() + "\t");
+				}
+			}
+			System.out.print("/n\t\t|\t");
+			for (int j = 0; j < array [i].length; j++){
+				if (array[i][j] != null){
+				System.out.print(array[i][j].getMinutes() + "\t");
+				}
+			}
+			System.out.print("\n\n");
+		}
+	}
+	
+	
 	
 	/**
 	* Computes how many minutes of work the specified tattoo artist has. 
@@ -81,27 +116,7 @@ public class LucyTattooParlor {
 	* @return true if the customer was added to the waitlist, false otherwise (if all artists were full) 
 	*/
 	public static boolean addCustomer(TattooCustomer [][] a, TattooCustomer c) {
-	
-//		int currentShortest = 0;
-//		int filledSlots = 0;
-//		
-//		for (int i = 0; i< a[0].length; i++){
-//			if(a[0][i] != null){
-//				currentShortest++;
-//			}
-//		}
-//					
-//		for (int x = 0; x >= a.length; x++){
-//			for (int j = 0; j < (a.length); j++){
-//				for (int i = 0; i< a[j].length; i++){
-//					if(a[j][i] != null){
-//						filledSlots++;
-//					}
-//					if(filledSlots < current)
-//				}
-//			}
-//		}	
-		
+			
 		//this is for the array index of the shortest time artist
 		int shortest = 0;
 		
