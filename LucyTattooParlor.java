@@ -1,43 +1,69 @@
 import java.util.*;
 
 public class LucyTattooParlor {
-
+	
+	public static int maxCustomers;
+	
 	public static void main(String [] args){
 		
 		Scanner input = new Scanner(System.in);
 		
+		String name = "";
+		String artist = "";
+		String tattoo = "";
+		int time;
+		int artistNum = 0;
+		
 		maxCustomers = Integer.parseInt(args[2]);
 		TattooCustomer [][] array = makeArray(args);
 		
-
-		System.out.println("Please enter your name.");
-		String name = input.next();
+		while (name.compareToIgnoreCase("Print Waitlist") != 0){
+			System.out.println("Please enter your name.");
+			name = input.next();
 			if (name.compareToIgnoreCase("Print Waitlist") == 0){
 				printArray(array);
+				break;
 			}
 			else {		
-		System.out.println("Hi " + name + ", what tatoo would you like?");
-		String tattoo = input.next();
+				System.out.println("Hi " + name + ", what tatoo would you like?");
+				tattoo = input.next();
 		
-		System.out.println("If you would like a specific tattoo artist, please enter their index (0, 1, 2, ect.). If you would like to be added to the shortest waiting list, please enter 'shortest'.");
-		String artist = input.next();
+				System.out.println("If you would like a specific tattoo artist, please enter their index (0, 1, 2, ect.). If you would like to be added to the shortest waiting list, please enter 'shortest'.");
+				artist = input.next();
+				if (artist.compareToIgnoreCase("shortest") != 0){
+					artistNum = Integer.parseInt(artist);
+				}
 					
-			if (artist.compareToIgnoreCase("shortest") == 0){
-				//add to shortest wait time
-			}
-			else {
-				// add the person to the specific artists index
-				
-			}
-		System.out.println("How many minutes is your tattoo expected to take?");
-		int time = input.nextInt();		 
+				System.out.println("How many minutes is your tattoo expected to take?");
+				time = input.nextInt();		 
 			
+			}
+	
+			TattooCustomer customer = new TattooCustomer(name, tattoo, time);
+			while (addCustomer(array, customer) == true || addCustomer(array, customer, artistNum) == true){
+				if (artist.compareToIgnoreCase("shortest") == 0){
+				
+					if (addCustomer(array, customer) == false){
+						System.out.println("Unfortunetly, all artists are full for tomorrow night, please come again another night.");
+					break;
+					}
+					else {
+						System.out.println("You have successfully been added to the waitlist, we will see you tomorrow.");
+						break;
+					}
+				}
+				else {
+					if (addCustomer(array, customer, artistNum) == false){
+						System.out.println("Unfortunetly, the artist you selected is completely booked for tomorrow night, please choose a different artist, as an integer.");
+						artistNum = input.nextInt();
+					}
+					else {
+						System.out.println("You have successfully been added to the waitlist, we will see you tomorrow.");
+						break;
+					}
+				}
+			}
 		}
-		
-			//add if the artist's indexes are full or if time > 8 hours, then the customer cannot be added to that artist and must print out an error message.
-		//add if for if all artists are full in either indexes or in time (8 hour max)
-
-		//must add name, tattoo, and time to specified artist or artist of shortest time
 	}
 	
 	public static TattooCustomer [][] makeArray(String [] args){
@@ -105,7 +131,6 @@ public class LucyTattooParlor {
 				}
 			}
 		}
-		
 		return false;
 	}
 	
@@ -125,15 +150,12 @@ public class LucyTattooParlor {
 				shortest = i;
 			}
 		}
-		
 		for (int j = 0; j < a[shortest].length; j++){
 			if (a[shortest][j] == null){
 				a[shortest][j] = c;
 				return true;
 			}
 		}
-		
 	return false;
 	}
-
 }
