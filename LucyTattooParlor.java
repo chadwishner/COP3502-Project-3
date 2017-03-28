@@ -14,7 +14,7 @@ public class LucyTattooParlor {
 		int time;
 		int artistNum = 0;
 		
-		maxCustomers = Integer.parseInt(args[2]);
+		maxCustomers = Integer.parseInt(args[1]);
 		TattooCustomer [][] array = makeArray(args);
 		
 		while (name.compareToIgnoreCase("Print Waitlist") != 0){
@@ -25,7 +25,7 @@ public class LucyTattooParlor {
 				break;
 			}
 			else {		
-				System.out.println("Hi " + name + ", what tatoo would you like?");
+				System.out.println("Hi " + name + ", what tattoo would you like?");
 				tattoo = input.next();
 		
 				System.out.println("If you would like a specific tattoo artist, please enter their index (0, 1, 2, ect.). If you would like to be added to the shortest waiting list, please enter 'shortest'.");
@@ -40,7 +40,8 @@ public class LucyTattooParlor {
 			}
 	
 			TattooCustomer customer = new TattooCustomer(name, tattoo, time);
-			while (addCustomer(array, customer) == true || addCustomer(array, customer, artistNum) == true){
+		
+			do {
 				if (artist.compareToIgnoreCase("shortest") == 0){
 				
 					if (addCustomer(array, customer) == false){
@@ -62,7 +63,7 @@ public class LucyTattooParlor {
 						break;
 					}
 				}
-			}
+			} while (addCustomer(array, customer) == true || addCustomer(array, customer, artistNum) == true);
 		}
 	}
 	
