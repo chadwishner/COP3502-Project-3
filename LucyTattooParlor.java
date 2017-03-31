@@ -32,7 +32,7 @@ public class LucyTattooParlor {
 			
 			//If user types in "Print Waitlist", print waitlist, and terminate program
 			if (name.compareToIgnoreCase("Print Waitlist") == 0){
-				printArray(array);
+				System.out.print(printArray(array));
 				break;
 			}
 			else {		
@@ -124,44 +124,49 @@ public class LucyTattooParlor {
 	
 	/**Method in order to print the array
 	 * @param The 2D array of TattooCustomers
+	 * @return The formatted String
 	 */
-	public static void printArray(TattooCustomer [][] array){
+	public static String printArray(TattooCustomer [][] array){
 		
+		//create string to store the print array
+		String print = "";
 		//for loop to run through all Tattoo artists
 		for (int i = 0; i < array.length; i++){
 			
-			//Print out formatting
-			System.out.print("\t\t|\t");
-			//Prints the first row of formatting and TattooCustomer Names
+			//add formatting
+			print = print + "\t\t|\t";
+			//add the first row of formatting and TattooCustomer Names
 			for (int j = 0; j < array [i].length; j++){
-				//Print out name if they are not null
+				//add out name if they are not null
 				if (array[i][j] != null){
-				System.out.print(array[i][j].getName() + "\t\t");
+				print = print + array[i][j].getName() + "\t\t";
 				}	
 			}
 	
-			//Print out formatting
-			System.out.print("\nArtist " + i + "\t|\t");
-			//Prints the first row of formatting and TattooCustomer Names
+			//add out formatting
+			print = print + "\nArtist " + i + "\t|\t";
+			//add the first row of formatting and TattooCustomer Names
 			for (int j = 0; j < array [i].length; j++){
-				//Print out name if they are not null
+				//add name if they are not null
 				if (array[i][j] != null){
-				System.out.print(array[i][j].getTattoo() + "\t\t");
+				print = print + array[i][j].getTattoo() + "\t\t";
 				}
 			}
 			
-			//Print out formatting
-			System.out.print("\n\t\t|\t");
-			//Prints the first row of formatting and TattooCustomer Names
+			//add out formatting
+			print = print + "\n\t\t|\t";
+			//add the first row of formatting and TattooCustomer Names
 			for (int j = 0; j < array [i].length; j++){
-				//Print out name if they are not null
+				//add out name if they are not null
 				if (array[i][j] != null){
-				System.out.print(array[i][j].getMinutes() + "\t\t");
+				print = print + array[i][j].getMinutes() + "\t\t";
 				}
 			}
-			//Prints new line
-			System.out.print("\n\n");
+			//add new line
+			print = print +"\n\n";
 		}
+		
+		return print;
 	}
 	
 	
