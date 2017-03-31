@@ -149,7 +149,14 @@ public class LucyTattooParlor {
 			for (int j = 0; j < array [i].length; j++){
 				//add name if they are not null
 				if (array[i][j] != null){
-					print = print + array[i][j].getTattoo() + "\t\t";
+					print = print + array[i][j].getTattoo();
+				
+					if (array[i][j].getTattoo().length() >= 8){
+						print = print + "\t";
+					}
+					else {
+						print = print + "\t\t";
+					}
 				}
 			}
 			
@@ -236,12 +243,22 @@ public class LucyTattooParlor {
 				shortest = i;
 			}
 		}
+	
+		//check to make sure that the waitlist isn't full through time or slots, add the customer to the waitlist and return true
+		int index = 0;
+		for (int x = 0; x < maxCustomers; x++){
+			if (a[shortest][x] != null){
+				index++;
+			}
+		}
 		
 		//add the TattooCustomer to the first available index in the array, return true if added
-		for (int j = 0; j < a[shortest].length; j++){
-			if (a[shortest][j] == null){
-				a[shortest][j] = c;
-				return true;
+		if ((computeMinutesOfWork(a[shortest]) <= 480) && (index < maxCustomers)){
+			for (int j = 0; j < a[shortest].length; j++){
+				if (a[shortest][j] == null){
+					a[shortest][j] = c;
+					return true;
+				}
 			}
 		}
 		
