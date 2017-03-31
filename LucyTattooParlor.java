@@ -2,9 +2,6 @@ import java.util.*;
 
 public class LucyTattooParlor {
 	
-	//create a global variable in order to know the max amount of customers that an artist can take
-	public static int maxCustomers;
-	
 	public static void main(String [] args){
 		
 		//create new scanner
@@ -16,9 +13,6 @@ public class LucyTattooParlor {
 		String tattoo = "";
 		int time;
 		int artistNum = 0;
-		
-		//set maxCustomers to the second  command line argument passed in
-		maxCustomers = Integer.parseInt(args[1]);
 		
 		//create and initialize the size of the 2D array to store the TattooCustomers
 		TattooCustomer [][] array = makeArray(args);
@@ -214,14 +208,14 @@ public class LucyTattooParlor {
 		
 		//Create an index to see how many customers are currently stored in the artist's waitlist
 		int index = 0;
-		for (int x = 0; x < maxCustomers; x++){
+		for (int x = 0; x < a.length; x++){
 			if (a[artistNum][x] != null){
 				index++;
 			}
 		}
 		
 		//check to make sure that the waitlist isn't full through time or slots, add the customer to the waitlist and return true
-		 if ((computeMinutesOfWork(a[artistNum]) <= 480) && (index < maxCustomers)){
+		 if (((computeMinutesOfWork(a[artistNum]) + c.getMinutes()) <= 480) && (index < a[artistNum].length)){
 			for (int i = 0; i < a[artistNum].length; i++){
 				if (a[artistNum][i] == null){
 					a[artistNum][i] = c;
@@ -254,14 +248,14 @@ public class LucyTattooParlor {
 	
 		//check to make sure that the waitlist isn't full through time or slots, add the customer to the waitlist and return true
 		int index = 0;
-		for (int x = 0; x < maxCustomers; x++){
+		for (int x = 0; x < a.length; x++){
 			if (a[shortest][x] != null){
 				index++;
 			}
 		}
 		
 		//add the TattooCustomer to the first available index in the array, return true if added
-		if ((computeMinutesOfWork(a[shortest]) <= 480) && (index < maxCustomers)){
+		if (((computeMinutesOfWork(a[shortest]) + c.getMinutes()) <= 480) && (index < a[shortest].length)){
 			for (int j = 0; j < a[shortest].length; j++){
 				if (a[shortest][j] == null){
 					a[shortest][j] = c;
