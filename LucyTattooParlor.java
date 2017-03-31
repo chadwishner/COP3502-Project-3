@@ -139,7 +139,7 @@ public class LucyTattooParlor {
 			for (int j = 0; j < array [i].length; j++){
 				//add out name if they are not null
 				if (array[i][j] != null){
-				print = print + array[i][j].getName() + "\t\t";
+					print = print + array[i][j].getName() + "\t\t";
 				}	
 			}
 	
@@ -149,7 +149,7 @@ public class LucyTattooParlor {
 			for (int j = 0; j < array [i].length; j++){
 				//add name if they are not null
 				if (array[i][j] != null){
-				print = print + array[i][j].getTattoo() + "\t\t";
+					print = print + array[i][j].getTattoo() + "\t\t";
 				}
 			}
 			
@@ -159,7 +159,7 @@ public class LucyTattooParlor {
 			for (int j = 0; j < array [i].length; j++){
 				//add out name if they are not null
 				if (array[i][j] != null){
-				print = print + array[i][j].getMinutes() + "\t\t";
+					print = print + array[i][j].getMinutes() + "\t\t";
 				}
 			}
 			//add new line
@@ -197,14 +197,21 @@ public class LucyTattooParlor {
 	*/
 	public static boolean addCustomer(TattooCustomer [][] a, TattooCustomer c, int artistNum) {
 		
-		//if the first slot in an artist's waitlist is null, add the Customer their and return True
-		if (a[artistNum][0] == null){
-			a[artistNum][0] = c;
-			return true;
+		//Create an index to see how many customers are currently stored in the artist's waitlist
+		int index = 0;
+		for (int x = 0; x < maxCustomers; x++){
+			if (a[artistNum][x] != null){
+				index++;
+			}
 		}
+		//if the first slot in an artist's waitlist is null, add the Customer their and return True
+//		if (a[artistNum][0] == null){
+//			a[artistNum][0] = c;
+//			return true;
+//		}
 		
 		//check to make sure that the waitlist isn't full through time or slots, add the customer to the waitlist and return true
-		else if ((computeMinutesOfWork(a[artistNum]) <= 480) && (a[artistNum].length < maxCustomers)){
+		 if ((computeMinutesOfWork(a[artistNum]) <= 480) && (index < maxCustomers)){
 			for (int i = 0; i < a[artistNum].length; i++){
 				if (a[artistNum][i] == null){
 					a[artistNum][i] = c;
