@@ -204,11 +204,6 @@ public class LucyTattooParlor {
 				index++;
 			}
 		}
-		//if the first slot in an artist's waitlist is null, add the Customer their and return True
-//		if (a[artistNum][0] == null){
-//			a[artistNum][0] = c;
-//			return true;
-//		}
 		
 		//check to make sure that the waitlist isn't full through time or slots, add the customer to the waitlist and return true
 		 if ((computeMinutesOfWork(a[artistNum]) <= 480) && (index < maxCustomers)){
