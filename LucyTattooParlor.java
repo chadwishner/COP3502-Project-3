@@ -27,7 +27,7 @@ public class LucyTattooParlor {
 		while (name.compareToIgnoreCase("Print Waitlist") != 0){
 			
 			//ask for the Customer's name
-			System.out.println("Please enter your name.");
+			System.out.println("Please enter your first name.");
 			name = input.nextLine();
 			
 			//If user types in "Print Waitlist", print waitlist, and terminate program
@@ -139,19 +139,26 @@ public class LucyTattooParlor {
 			for (int j = 0; j < array [i].length; j++){
 				//add out name if they are not null
 				if (array[i][j] != null){
-					print = print + array[i][j].getName() + "\t\t";
-				}	
+					print = print + array[i][j].getName();
+
+					if (array[i][j].getTattoo().length() >= 8){
+						print = print + "\t";
+					}
+					else {
+						print = print + "\t\t";
+					}	
+				}
 			}
 	
 			//add out formatting
 			print = print + "\nArtist " + i + "\t|\t";
 			//add the first row of formatting and TattooCustomer Names
-			for (int j = 0; j < array [i].length; j++){
+			for (int x = 0; x < array [i].length; x++){
 				//add name if they are not null
-				if (array[i][j] != null){
-					print = print + array[i][j].getTattoo();
+				if (array[i][x] != null){
+					print = print + array[i][x].getTattoo();
 				
-					if (array[i][j].getTattoo().length() >= 8){
+					if (array[i][x].getTattoo().length() >= 8){
 						print = print + "\t";
 					}
 					else {
@@ -163,10 +170,11 @@ public class LucyTattooParlor {
 			//add out formatting
 			print = print + "\n\t\t|\t";
 			//add the first row of formatting and TattooCustomer Names
-			for (int j = 0; j < array [i].length; j++){
+			for (int y = 0; y < array [i].length; y++){
 				//add out name if they are not null
-				if (array[i][j] != null){
-					print = print + array[i][j].getMinutes() + "\t\t";
+				if (array[i][y] != null){
+					print = print + array[i][y].getMinutes() + "\t\t";
+
 				}
 			}
 			//add new line
